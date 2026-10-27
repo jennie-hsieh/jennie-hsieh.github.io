@@ -5,159 +5,276 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yu-Chen Hsieh</title>
 <meta name="description" content="Neuroscience researcher working on EEG, brain-computer interfaces and AR/VR.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#fafaf7; --fg:#1d1d1b; --muted:#6a6a64; --accent:#2f5d62; --line:#e2e2da; }
+  :root {
+    --bg:#faf9f6; --fg:#16181a; --body:#3a3d40; --muted:#8a8d90; --faint:#d3d3cf;
+    --accent:#1f4a4d; --line:#e7e6e1;
+    --sans:"IBM Plex Sans","Noto Sans TC",-apple-system,"Segoe UI",sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
   @media (prefers-color-scheme: dark) {
-    :root { --bg:#161817; --fg:#ecece6; --muted:#9a9a92; --accent:#8cc5c9; --line:#2b2e2c; }
+    :root { --bg:#141716; --fg:#f0efe9; --body:#c4c6c2; --muted:#7f8481; --faint:#3a3e3c;
+      --accent:#8cc5c9; --line:#262a28; }
   }
   * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--fg);
-    font:17px/1.65 -apple-system, "Segoe UI", "Noto Sans TC", sans-serif; }
-  main { max-width:760px; margin:0 auto; padding:56px 20px 80px; }
-  h1 { font-size:2.1rem; margin:0 0 4px; letter-spacing:-0.01em; }
-  .tagline { color:var(--muted); margin:0 0 28px; }
-  h2 { font-size:1.05rem; text-transform:uppercase; letter-spacing:.08em; color:var(--accent);
-    border-bottom:1px solid var(--line); padding-bottom:6px; margin:44px 0 18px; }
-  .item { margin-bottom:22px; }
-  .item h3 { font-size:1.05rem; margin:0; }
-  .item .meta { color:var(--muted); font-size:.92rem; }
-  .item p, .item ul { margin:6px 0 0; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--bg); color:var(--body); font:400 17px/1.7 var(--sans); }
+  a { color:var(--accent); text-underline-offset:3px; }
+
+  .layout { display:grid; grid-template-columns:300px minmax(0,1fr); max-width:1080px; margin:0 auto; }
+
+  /* Sidebar */
+  aside { position:sticky; top:0; height:100vh; padding:72px 0 40px 32px; display:flex; flex-direction:column; }
+  .brand { font-weight:600; color:var(--fg); font-size:1.05rem; margin:0 0 36px 32px; }
+  nav ol { list-style:none; margin:0; padding:0; }
+  nav a { display:flex; align-items:baseline; gap:18px; padding:9px 0 9px 32px; text-decoration:none;
+    color:var(--body); font-size:1.2rem; border-left:3px solid transparent; margin-left:-3px; }
+  nav a .n { font:400 .95rem var(--mono); color:var(--faint); transition:color .15s; }
+  nav a:hover { color:var(--fg); }
+  nav a[aria-current="page"] { color:var(--fg); font-weight:600; border-left-color:var(--accent); }
+  nav a[aria-current="page"] .n { color:var(--accent); }
+  .links { margin:36px 0 0 32px; display:flex; flex-wrap:wrap; gap:10px 20px; }
+  .links a { font:400 .82rem var(--mono); letter-spacing:.08em; text-transform:uppercase;
+    color:var(--body); text-decoration:none; }
+  .links a:hover { color:var(--accent); }
+  .updated { margin:20px 0 0 32px; font:400 .8rem var(--mono); color:var(--muted); }
+
+  /* Content */
+  main { padding:72px 40px 120px 40px; max-width:720px; }
+  section { display:none; }
+  section.active { display:block; animation:fade .25s ease; }
+  @keyframes fade { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+  .kicker { font:500 .8rem var(--mono); letter-spacing:.12em; text-transform:uppercase; color:var(--accent); margin:0 0 14px; }
+  h1 { font-size:2.5rem; line-height:1.15; color:var(--fg); margin:0 0 10px; letter-spacing:-.02em; font-weight:600; }
+  h2 { font-size:1.9rem; color:var(--fg); margin:0 0 28px; letter-spacing:-.01em; font-weight:600; }
+  .lead { font-size:1.2rem; color:var(--muted); margin:0 0 28px; }
+  .item { margin:0 0 34px; }
+  .item h3 { font-size:1.1rem; color:var(--fg); margin:0; font-weight:600; }
+  .meta { font:400 .82rem var(--mono); color:var(--muted); margin-top:4px; letter-spacing:.02em; }
+  .item p, .item ul { margin:10px 0 0; }
   .item ul { padding-left:20px; }
-  .tags { margin-top:8px; display:flex; flex-wrap:wrap; gap:6px; }
-  .tags span { font-size:.8rem; border:1px solid var(--line); border-radius:999px; padding:1px 10px; color:var(--muted); }
-  .honors { list-style:none; padding:0; margin:0; }
-  .honors li { display:flex; justify-content:space-between; gap:16px; padding:4px 0; border-bottom:1px dotted var(--line); }
-  .honors .yr { color:var(--muted); white-space:nowrap; }
-  a { color:var(--accent); }
-  footer { margin-top:56px; color:var(--muted); font-size:.85rem; }
+  .item li { margin-bottom:4px; }
+  .tags { margin-top:12px; display:flex; flex-wrap:wrap; gap:6px; }
+  .tags span { font:400 .75rem var(--mono); border:1px solid var(--line); border-radius:3px; padding:2px 9px; color:var(--muted); }
+  .sub { font:500 .8rem var(--mono); letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+    border-bottom:1px solid var(--line); padding-bottom:8px; margin:48px 0 24px; }
+  .sub:first-of-type { margin-top:0; }
+  .rows { list-style:none; padding:0; margin:0; }
+  .rows li { display:grid; grid-template-columns:64px 1fr; gap:16px; padding:10px 0; border-bottom:1px solid var(--line); }
+  .rows .yr { font:400 .85rem var(--mono); color:var(--muted); padding-top:3px; }
+  .btn { display:inline-block; margin-top:8px; font:500 .85rem var(--mono); letter-spacing:.06em; text-transform:uppercase;
+    padding:10px 18px; border:1px solid var(--accent); color:var(--accent); text-decoration:none; border-radius:3px; }
+  .btn:hover { background:var(--accent); color:var(--bg); }
+
+  /* Mobile */
+  @media (max-width: 820px) {
+    .layout { display:block; }
+    aside { position:static; height:auto; padding:24px 20px 0; }
+    .brand { margin:0 0 12px; }
+    nav ol { display:flex; flex-wrap:wrap; gap:2px 18px; }
+    nav a { padding:6px 0; font-size:1rem; border-left:0; margin:0; gap:8px; border-bottom:2px solid transparent; }
+    nav a[aria-current="page"] { border-bottom-color:var(--accent); }
+    .links, .updated { display:none; }
+    main { padding:32px 20px 80px; }
+    h1 { font-size:2rem; }
+  }
 </style>
 </head>
 <body>
+<div class="layout">
+
+<aside>
+  <div class="brand">Yu-Chen Hsieh</div>
+  <nav aria-label="Main">
+    <ol>
+      <li><a href="#home"><span class="n">01</span>Home</a></li>
+      <li><a href="#about"><span class="n">02</span>About</a></li>
+      <li><a href="#experience"><span class="n">03</span>Experience</a></li>
+      <li><a href="#research"><span class="n">04</span>Research</a></li>
+      <li><a href="#awards"><span class="n">05</span>Awards</a></li>
+      <li><a href="#contact"><span class="n">06</span>Contact</a></li>
+    </ol>
+  </nav>
+  <div class="links">
+    <a href="mailto:hsiehyuchen.aca@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/yu-chen-hsieh-ych715">LinkedIn</a>
+    <a href="cv.pdf">CV</a>
+  </div>
+  <div class="updated">Updated 2026-10</div>
+</aside>
+
 <main>
 
-<h1>Yu-Chen Hsieh</h1>
-<p class="tagline">Research Assistant · EEG, brain-computer interfaces &amp; AR/VR · Taipei, Taiwan</p>
+<!-- 01 HOME -->
+<section id="home">
+  <p class="kicker">Neuroscience · BCI · AR/VR</p>
+  <h1>Yu-Chen Hsieh</h1>
+  <p class="lead">Research Assistant at Academia Sinica, Taipei</p>
+  <p>I run human-subjects EEG experiments for brain-computer interface and AR/VR applications.
+  My background spans rodent electrophysiology, medical-device regulatory review and multimodal human EEG,
+  and I am interested in bridging neuroscience with clinical and industry applications.</p>
+  <p><a class="btn" href="#research">See research →</a></p>
+</section>
 
-<p>I am a neuroscience researcher at Academia Sinica, running human-subjects EEG
-experiments for brain-computer interface and AR/VR applications. My background spans
-rodent electrophysiology, medical-device regulatory review and multimodal human EEG.
-I am interested in bridging neuroscience with clinical and industry applications.</p>
+<!-- 02 ABOUT -->
+<section id="about">
+  <h2>About</h2>
+  <p>I am a neuroscience researcher currently working at the Research Center for Information Technology
+  Innovation (CITI), Academia Sinica. My work covers EEG experiment design, data acquisition and analysis,
+  as well as public science outreach on brain-computer interfaces.</p>
 
-<h2>Experience</h2>
-<div class="item">
-  <h3>Research Assistant — Research Center for Information Technology Innovation, Academia Sinica</h3>
-  <div class="meta">May 2026 – present · CITI Lab</div>
-  <ul>
-    <li>Brain-computer interface and AR/VR research</li>
-    <li>Human EEG experimental procedures</li>
-    <li>EEG signal analysis</li>
+  <h3 class="sub">Education</h3>
+  <div class="item">
+    <h3>M.S. in Neuroscience — National Yang Ming Chiao Tung University</h3>
+    <div class="meta">Sep 2018 – Jun 2020 · GPA 3.96 / 4.3</div>
+    <p>Coursework: Cognitive Neuroscience, Fundamentals of Neural Signal Analysis, Advanced Statistics in Psychology.</p>
+  </div>
+  <div class="item">
+    <h3>B.S. in Life Science — National Tsing Hua University</h3>
+    <div class="meta">Sep 2015 – Jun 2018 · GPA 3.85 / 4.3</div>
+    <p>Coursework: Neuroscience, Neuropsychology, Neurobiology.</p>
+  </div>
+
+  <h3 class="sub">Skills</h3>
+  <div class="item">
+    <p><strong>Analysis &amp; programming</strong> — MATLAB (ERP processing, EEG analysis), EEGLAB, Python (analysis, visualization, scripting)</p>
+    <p><strong>Laboratory</strong> — rodent microsurgery (stereotaxic implantation), microscopy, biochemical and molecular biology, animal experimental procedures</p>
+    <p><strong>Hardware</strong> — basic electronics and soldering (PCB assembly and rework)</p>
+    <p><strong>Languages</strong> — Mandarin, English</p>
+  </div>
+</section>
+
+<!-- 03 EXPERIENCE -->
+<section id="experience">
+  <h2>Experience</h2>
+  <div class="item">
+    <h3>Research Assistant — RCITI, Academia Sinica</h3>
+    <div class="meta">May 2026 – present · CITI Lab</div>
+    <ul>
+      <li>Brain-computer interface and AR/VR research</li>
+      <li>Human EEG experimental procedures</li>
+      <li>EEG signal analysis</li>
+    </ul>
+  </div>
+  <div class="item">
+    <h3>Medical Device Associate Reviewer — Taiwan FDA (TFDA)</h3>
+    <div class="meta">Nov 2022 – Feb 2025</div>
+    <ul>
+      <li>Registration and amendment registration of electrical medical devices</li>
+      <li>Contract manufacturing change registration</li>
+    </ul>
+  </div>
+  <div class="item">
+    <h3>Research Assistant — Taiwan Mouse Clinical Pathology Core Lab, Academia Sinica</h3>
+    <div class="meta">Mar 2021 – Nov 2022</div>
+    <ul>
+      <li>Microscopy, biochemical and molecular biology techniques</li>
+      <li>Animal experimental procedures</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 04 RESEARCH -->
+<section id="research">
+  <h2>Research</h2>
+
+  <h3 class="sub">Current work</h3>
+  <div class="item">
+    <h3>Audiovisual 40 Hz ASSR + SSVEP entrainment</h3>
+    <p>Five-condition study (visual-only, auditory and audiovisual stimuli with carrier and clicker variants) of gamma-band entrainment, testing whether in-phase audiovisual stimulation increases 40 Hz SNR. Wrote the SOPs and the analysis pipeline (Welch PSD, SNR, Morlet ITPC).</p>
+    <div class="tags"><span>BioSemi</span><span>PsychoPy</span><span>LSL</span><span>MNE-Python</span></div>
+  </div>
+  <div class="item">
+    <h3>LanguageEEG — syntax and comprehension ERPs</h3>
+    <p>ERP study of N400, P600 and LAN/ELAN components with 32-channel EEG and eye tracking. Nine conditions crossing attention mode and grammaticality; integrated a Tobii Pro Nano eye tracker with custom calibration.</p>
+    <div class="tags"><span>EEG</span><span>ERP</span><span>Tobii</span><span>PsychoPy</span></div>
+  </div>
+  <div class="item">
+    <h3>Multimodal cognitive assessment from facial behavior</h3>
+    <p>Multimodal deep-learning model that predicts MoCA sub-domain scores from facial video recorded during a verbal learning task. Contributed to model development, ablation studies, GPU training setup and manuscript drafting.</p>
+    <div class="tags"><span>Deep learning</span><span>Multimodal AI</span><span>Cross-modal attention</span></div>
+  </div>
+  <div class="item">
+    <h3>Real-time gaze validation display</h3>
+    <p>Live display comparing webcam-based computer-vision pupil tracking against a Tobii eye tracker and EOG, computed in real time during recording.</p>
+    <div class="tags"><span>Computer vision</span><span>Eye tracking</span><span>EOG</span></div>
+  </div>
+  <div class="item">
+    <h3>BCI science outreach</h3>
+    <p>Co-organized two brain-computer interface camps of 32 participants each: Winter 2026 at Academia Sinica and Summer 2026 at NCKU C-Hub.</p>
+  </div>
+
+  <h3 class="sub">Earlier research</h3>
+  <div class="item">
+    <h3>Development and validation of a novel 32-channel rodent EEG system</h3>
+    <div class="meta">Master's thesis · Jul 2018 – Nov 2020 · Best Thesis Award</div>
+    <ul>
+      <li>Designed custom electrodes, performed impedance correction, recorded ERPs and analyzed data in rodent models.</li>
+      <li>Found distinct ERP patterns for passive versus reward-modulated visual and auditory stimuli.</li>
+      <li>Tracked arousal-dependent oscillatory changes continuously throughout recordings.</li>
+      <li>Maintained low, stable impedance for more than 6 months of behavioral recording.</li>
+    </ul>
+  </div>
+  <div class="item">
+    <h3>Effect of oscillatory activity on axon regeneration of retinal ganglion cells in rd1 mice</h3>
+    <div class="meta">Undergraduate research · Feb 2016 – Jul 2018 · Advisor: Dr. Chuan-Chin Chiao</div>
+    <ul>
+      <li>Showed that electrical oscillations enhance axonal regeneration in cultured retinal tissue.</li>
+      <li>Validated ganglion cell electrical activity with multielectrode arrays (MEA) under pharmacological modulation.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 05 AWARDS -->
+<section id="awards">
+  <h2>Awards</h2>
+  <ul class="rows">
+    <li><span class="yr">2026</span><span>Fellow, Taiwan Global Pathfinders Initiative</span></li>
+    <li><span class="yr">2020</span><span>Outstanding Award, Student Presentation Competition, Taiwan Society of Cognitive Neuroscience</span></li>
+    <li><span class="yr">2020</span><span>Best Thesis Award (1st place), Institute of Neuroscience, NYCU</span></li>
+    <li><span class="yr">2020</span><span>Outstanding Thesis Scholarship, Master's Program, NYCU</span></li>
+    <li><span class="yr">2020</span><span>Best Popularity Award, Poster Competition, Institute of Neuroscience, NYCU</span></li>
+    <li><span class="yr">2018</span><span>Best Popularity Award, Poster Competition, College of Life Science and Medicine, NTHU</span></li>
+    <li><span class="yr">2017</span><span>Academic Excellence Award, Junior Fall and Junior Spring, NTHU</span></li>
   </ul>
-</div>
-<div class="item">
-  <h3>Medical Device Associate Reviewer — Taiwan Food and Drug Administration (TFDA)</h3>
-  <div class="meta">Nov 2022 – Feb 2025</div>
-  <ul>
-    <li>Registration and amendment registration of electrical medical devices</li>
-    <li>Contract manufacturing change registration</li>
-  </ul>
-</div>
-<div class="item">
-  <h3>Research Assistant — Taiwan Mouse Clinical Pathology Core Lab, Academia Sinica</h3>
-  <div class="meta">Mar 2021 – Nov 2022</div>
-  <ul>
-    <li>Microscopy, biochemical and molecular biology techniques</li>
-    <li>Animal experimental procedures</li>
-  </ul>
-</div>
+</section>
 
-<h2>Education</h2>
-<div class="item">
-  <h3>M.S. in Neuroscience — National Yang Ming Chiao Tung University (NYCU)</h3>
-  <div class="meta">Sep 2018 – Jun 2020 · GPA 3.96 / 4.3</div>
-  <p>Coursework: Cognitive Neuroscience, Fundamentals of Neural Signal Analysis, Advanced Statistics in Psychology.</p>
-</div>
-<div class="item">
-  <h3>B.S. in Life Science — National Tsing Hua University (NTHU)</h3>
-  <div class="meta">Sep 2015 – Jun 2018 · GPA 3.85 / 4.3</div>
-  <p>Coursework: Neuroscience, Neuropsychology, Neurobiology.</p>
-</div>
+<!-- 06 CONTACT -->
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Open to conversations about research collaboration and opportunities in neuroscience and BCI.</p>
+  <p>
+    Email — <a href="mailto:hsiehyuchen.aca@gmail.com">hsiehyuchen.aca@gmail.com</a><br>
+    LinkedIn — <a href="https://www.linkedin.com/in/yu-chen-hsieh-ych715">yu-chen-hsieh-ych715</a>
+  </p>
+  <p><a class="btn" href="cv.pdf">Download CV (PDF)</a></p>
+</section>
 
-<h2>Research</h2>
-<div class="item">
-  <h3>Development and validation of a novel 32-channel rodent EEG system</h3>
-  <div class="meta">Master's thesis, Jul 2018 – Nov 2020 · Best Thesis Award</div>
-  <ul>
-    <li>Designed custom electrodes, performed impedance correction, recorded ERPs and analyzed data in rodent models.</li>
-    <li>Found distinct ERP patterns for passive versus reward-modulated visual and auditory stimuli.</li>
-    <li>Tracked arousal-dependent oscillatory changes continuously throughout recordings.</li>
-    <li>Maintained low, stable impedance for more than 6 months of behavioral recording.</li>
-  </ul>
-</div>
-<div class="item">
-  <h3>Effect of oscillatory activity on axon regeneration of retinal ganglion cells in rd1 mice</h3>
-  <div class="meta">Undergraduate research, Feb 2016 – Jul 2018 · Advisor: Dr. Chuan-Chin Chiao</div>
-  <ul>
-    <li>Showed that electrical oscillations enhance axonal regeneration in cultured retinal tissue.</li>
-    <li>Validated ganglion cell electrical activity with multielectrode arrays (MEA) under pharmacological modulation.</li>
-  </ul>
-</div>
-
-<h2>Current projects</h2>
-
-<div class="item">
-  <h3>Audiovisual 40 Hz ASSR + SSVEP entrainment</h3>
-  <p>Five-condition study (visual-only, auditory and audiovisual stimuli with carrier and clicker variants) of gamma-band entrainment, testing whether in-phase audiovisual stimulation increases 40 Hz SNR. Wrote the SOPs and the analysis pipeline (Welch PSD, SNR, Morlet ITPC).</p>
-  <div class="tags"><span>BioSemi</span><span>PsychoPy</span><span>LSL</span><span>MNE-Python</span></div>
-</div>
-
-<div class="item">
-  <h3>LanguageEEG — syntax and comprehension ERPs</h3>
-  <p>ERP study of N400, P600 and LAN/ELAN components with 32-channel EEG and eye tracking. Nine conditions crossing attention mode and grammaticality; integrated a Tobii Pro Nano eye tracker with custom calibration.</p>
-  <div class="tags"><span>EEG</span><span>ERP</span><span>Tobii</span><span>PsychoPy</span></div>
-</div>
-
-<div class="item">
-  <h3>Multimodal cognitive assessment from facial behavior</h3>
-  <p>Multimodal deep-learning model that predicts MoCA sub-domain scores from facial video recorded during a verbal learning task. Contributed to model development, ablation studies, GPU training setup and manuscript drafting.</p>
-  <div class="tags"><span>Deep learning</span><span>Multimodal AI</span><span>Cross-modal attention</span></div>
-</div>
-
-<div class="item">
-  <h3>Real-time gaze validation display</h3>
-  <p>Live display comparing webcam-based computer-vision pupil tracking against a Tobii eye tracker and EOG, computed in real time during recording.</p>
-  <div class="tags"><span>Computer vision</span><span>Eye tracking</span><span>EOG</span></div>
-</div>
-
-<div class="item">
-  <h3>BCI science outreach</h3>
-  <p>Co-organized two brain-computer interface camps of 32 participants each: Winter 2026 at Academia Sinica and Summer 2026 at NCKU C-Hub.</p>
-</div>
-
-<h2>Honors &amp; awards</h2>
-<ul class="honors">
-  <li><span>Fellow, Taiwan Global Pathfinders Initiative</span><span class="yr">2026</span></li>
-  <li><span>Outstanding Award, Student Presentation Competition, Taiwan Society of Cognitive Neuroscience</span><span class="yr">2020</span></li>
-  <li><span>Best Thesis Award (1st place), Institute of Neuroscience, NYCU</span><span class="yr">2020</span></li>
-  <li><span>Outstanding Thesis Scholarship, Master's Program, NYCU</span><span class="yr">2020</span></li>
-  <li><span>Best Popularity Award, Poster Competition, Institute of Neuroscience, NYCU</span><span class="yr">2020</span></li>
-  <li><span>Best Popularity Award, Poster Competition, College of Life Science and Medicine, NTHU</span><span class="yr">2018</span></li>
-  <li><span>Academic Excellence Award, Junior Fall and Junior Spring, NTHU</span><span class="yr">2017</span></li>
-</ul>
-
-<h2>Skills</h2>
-<div class="item">
-  <p><strong>Analysis &amp; programming:</strong> MATLAB (ERP processing, EEG analysis), EEGLAB, Python (analysis, visualization, scripting)</p>
-  <p><strong>Laboratory:</strong> rodent microsurgery (stereotaxic implantation), microscopy, biochemical and molecular biology techniques, animal experimental procedures</p>
-  <p><strong>Hardware:</strong> basic electronics and soldering (PCB assembly and rework)</p>
-  <p><strong>Languages:</strong> Mandarin, English</p>
-</div>
-
-<h2>Contact</h2>
-<p>Email: <a href="mailto:hsiehyuchen.aca@gmail.com">hsiehyuchen.aca@gmail.com</a> ·
-<a href="https://www.linkedin.com/in/yu-chen-hsieh-ych715">LinkedIn</a> ·
-<a href="cv.pdf">Download CV (PDF)</a></p>
-
-<footer>© 2026 Yu-Chen Hsieh</footer>
 </main>
+</div>
+
+<script>
+(function () {
+  var ids = ["home","about","experience","research","awards","contact"];
+  var links = document.querySelectorAll("nav a");
+  function show() {
+    var id = (location.hash || "#home").slice(1);
+    if (ids.indexOf(id) === -1) id = "home";
+    ids.forEach(function (s) {
+      document.getElementById(s).classList.toggle("active", s === id);
+    });
+    links.forEach(function (a) {
+      if (a.getAttribute("href") === "#" + id) a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
+    });
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener("hashchange", show);
+  show();
+})();
+</script>
 </body>
 </html>
