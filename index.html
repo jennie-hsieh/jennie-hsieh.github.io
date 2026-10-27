@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yu-Chen Hsieh</title>
+<meta name="description" content="Neuroscience researcher working on EEG, brain-computer interfaces and AR/VR.">
+<style>
+  :root { --bg:#fafaf7; --fg:#1d1d1b; --muted:#6a6a64; --accent:#2f5d62; --line:#e2e2da; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#161817; --fg:#ecece6; --muted:#9a9a92; --accent:#8cc5c9; --line:#2b2e2c; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+    font:17px/1.65 -apple-system, "Segoe UI", "Noto Sans TC", sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:56px 20px 80px; }
+  h1 { font-size:2.1rem; margin:0 0 4px; letter-spacing:-0.01em; }
+  .tagline { color:var(--muted); margin:0 0 28px; }
+  h2 { font-size:1.05rem; text-transform:uppercase; letter-spacing:.08em; color:var(--accent);
+    border-bottom:1px solid var(--line); padding-bottom:6px; margin:44px 0 18px; }
+  .item { margin-bottom:22px; }
+  .item h3 { font-size:1.05rem; margin:0; }
+  .item .meta { color:var(--muted); font-size:.92rem; }
+  .item p, .item ul { margin:6px 0 0; }
+  .item ul { padding-left:20px; }
+  .tags { margin-top:8px; display:flex; flex-wrap:wrap; gap:6px; }
+  .tags span { font-size:.8rem; border:1px solid var(--line); border-radius:999px; padding:1px 10px; color:var(--muted); }
+  .honors { list-style:none; padding:0; margin:0; }
+  .honors li { display:flex; justify-content:space-between; gap:16px; padding:4px 0; border-bottom:1px dotted var(--line); }
+  .honors .yr { color:var(--muted); white-space:nowrap; }
+  a { color:var(--accent); }
+  footer { margin-top:56px; color:var(--muted); font-size:.85rem; }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Yu-Chen Hsieh</h1>
+<p class="tagline">Research Assistant · EEG, brain-computer interfaces &amp; AR/VR · Taipei, Taiwan</p>
+
+<p>I am a neuroscience researcher at Academia Sinica, running human-subjects EEG
+experiments for brain-computer interface and AR/VR applications. My background spans
+rodent electrophysiology, medical-device regulatory review and multimodal human EEG.
+I am interested in bridging neuroscience with clinical and industry applications.</p>
+
+<h2>Experience</h2>
+<div class="item">
+  <h3>Research Assistant — Research Center for Information Technology Innovation, Academia Sinica</h3>
+  <div class="meta">May 2026 – present · CITI Lab</div>
+  <ul>
+    <li>Brain-computer interface and AR/VR research</li>
+    <li>Human EEG experimental procedures</li>
+    <li>EEG signal analysis</li>
+  </ul>
+</div>
+<div class="item">
+  <h3>Medical Device Associate Reviewer — Taiwan Food and Drug Administration (TFDA)</h3>
+  <div class="meta">Nov 2022 – Feb 2025</div>
+  <ul>
+    <li>Registration and amendment registration of electrical medical devices</li>
+    <li>Contract manufacturing change registration</li>
+  </ul>
+</div>
+<div class="item">
+  <h3>Research Assistant — Taiwan Mouse Clinical Pathology Core Lab, Academia Sinica</h3>
+  <div class="meta">Mar 2021 – Nov 2022</div>
+  <ul>
+    <li>Microscopy, biochemical and molecular biology techniques</li>
+    <li>Animal experimental procedures</li>
+  </ul>
+</div>
+
+<h2>Education</h2>
+<div class="item">
+  <h3>M.S. in Neuroscience — National Yang Ming Chiao Tung University (NYCU)</h3>
+  <div class="meta">Sep 2018 – Jun 2020 · GPA 3.96 / 4.3</div>
+  <p>Coursework: Cognitive Neuroscience, Fundamentals of Neural Signal Analysis, Advanced Statistics in Psychology.</p>
+</div>
+<div class="item">
+  <h3>B.S. in Life Science — National Tsing Hua University (NTHU)</h3>
+  <div class="meta">Sep 2015 – Jun 2018 · GPA 3.85 / 4.3</div>
+  <p>Coursework: Neuroscience, Neuropsychology, Neurobiology.</p>
+</div>
+
+<h2>Research</h2>
+<div class="item">
+  <h3>Development and validation of a novel 32-channel rodent EEG system</h3>
+  <div class="meta">Master's thesis, Jul 2018 – Nov 2020 · Best Thesis Award</div>
+  <ul>
+    <li>Designed custom electrodes, performed impedance correction, recorded ERPs and analyzed data in rodent models.</li>
+    <li>Found distinct ERP patterns for passive versus reward-modulated visual and auditory stimuli.</li>
+    <li>Tracked arousal-dependent oscillatory changes continuously throughout recordings.</li>
+    <li>Maintained low, stable impedance for more than 6 months of behavioral recording.</li>
+  </ul>
+</div>
+<div class="item">
+  <h3>Effect of oscillatory activity on axon regeneration of retinal ganglion cells in rd1 mice</h3>
+  <div class="meta">Undergraduate research, Feb 2016 – Jul 2018 · Advisor: Dr. Chuan-Chin Chiao</div>
+  <ul>
+    <li>Showed that electrical oscillations enhance axonal regeneration in cultured retinal tissue.</li>
+    <li>Validated ganglion cell electrical activity with multielectrode arrays (MEA) under pharmacological modulation.</li>
+  </ul>
+</div>
+
+<h2>Current projects</h2>
+
+<div class="item">
+  <h3>Audiovisual 40 Hz ASSR + SSVEP entrainment</h3>
+  <p>Five-condition study (visual-only, auditory and audiovisual stimuli with carrier and clicker variants) of gamma-band entrainment, testing whether in-phase audiovisual stimulation increases 40 Hz SNR. Wrote the SOPs and the analysis pipeline (Welch PSD, SNR, Morlet ITPC).</p>
+  <div class="tags"><span>BioSemi</span><span>PsychoPy</span><span>LSL</span><span>MNE-Python</span></div>
+</div>
+
+<div class="item">
+  <h3>LanguageEEG — syntax and comprehension ERPs</h3>
+  <p>ERP study of N400, P600 and LAN/ELAN components with 32-channel EEG and eye tracking. Nine conditions crossing attention mode and grammaticality; integrated a Tobii Pro Nano eye tracker with custom calibration.</p>
+  <div class="tags"><span>EEG</span><span>ERP</span><span>Tobii</span><span>PsychoPy</span></div>
+</div>
+
+<div class="item">
+  <h3>Multimodal cognitive assessment from facial behavior</h3>
+  <p>Multimodal deep-learning model that predicts MoCA sub-domain scores from facial video recorded during a verbal learning task. Contributed to model development, ablation studies, GPU training setup and manuscript drafting.</p>
+  <div class="tags"><span>Deep learning</span><span>Multimodal AI</span><span>Cross-modal attention</span></div>
+</div>
+
+<div class="item">
+  <h3>Real-time gaze validation display</h3>
+  <p>Live display comparing webcam-based computer-vision pupil tracking against a Tobii eye tracker and EOG, computed in real time during recording.</p>
+  <div class="tags"><span>Computer vision</span><span>Eye tracking</span><span>EOG</span></div>
+</div>
+
+<div class="item">
+  <h3>BCI science outreach</h3>
+  <p>Co-organized two brain-computer interface camps of 32 participants each: Winter 2026 at Academia Sinica and Summer 2026 at NCKU C-Hub.</p>
+</div>
+
+<h2>Honors &amp; awards</h2>
+<ul class="honors">
+  <li><span>Fellow, Taiwan Global Pathfinders Initiative</span><span class="yr">2026</span></li>
+  <li><span>Outstanding Award, Student Presentation Competition, Taiwan Society of Cognitive Neuroscience</span><span class="yr">2020</span></li>
+  <li><span>Best Thesis Award (1st place), Institute of Neuroscience, NYCU</span><span class="yr">2020</span></li>
+  <li><span>Outstanding Thesis Scholarship, Master's Program, NYCU</span><span class="yr">2020</span></li>
+  <li><span>Best Popularity Award, Poster Competition, Institute of Neuroscience, NYCU</span><span class="yr">2020</span></li>
+  <li><span>Best Popularity Award, Poster Competition, College of Life Science and Medicine, NTHU</span><span class="yr">2018</span></li>
+  <li><span>Academic Excellence Award, Junior Fall and Junior Spring, NTHU</span><span class="yr">2017</span></li>
+</ul>
+
+<h2>Skills</h2>
+<div class="item">
+  <p><strong>Analysis &amp; programming:</strong> MATLAB (ERP processing, EEG analysis), EEGLAB, Python (analysis, visualization, scripting)</p>
+  <p><strong>Laboratory:</strong> rodent microsurgery (stereotaxic implantation), microscopy, biochemical and molecular biology techniques, animal experimental procedures</p>
+  <p><strong>Hardware:</strong> basic electronics and soldering (PCB assembly and rework)</p>
+  <p><strong>Languages:</strong> Mandarin, English</p>
+</div>
+
+<h2>Contact</h2>
+<p>Email: <a href="mailto:hsiehyuchen.aca@gmail.com">hsiehyuchen.aca@gmail.com</a> ·
+<a href="https://www.linkedin.com/in/yu-chen-hsieh-ych715">LinkedIn</a> ·
+<a href="cv.pdf">Download CV (PDF)</a></p>
+
+<footer>© 2026 Yu-Chen Hsieh</footer>
+</main>
+</body>
+</html>
